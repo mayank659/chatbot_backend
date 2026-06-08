@@ -13,6 +13,7 @@ CORS(app)
 
 client = genai.Client(api_key=os.getenv("GEMINI_API_KEY"))
 
+
    
 @app.route("/")
 def home():
@@ -24,10 +25,10 @@ def chat():
     message = request.json.get('message')
     
     response = client.models.generate_content(
-        model="gemini-2.0-flash-lite",
+        model="gemma-4-31b-it",
         contents=message
     )
-
+    
     return jsonify({'response': response.text})
  except Exception as e:
      print(f"Error: {str(e)}")
