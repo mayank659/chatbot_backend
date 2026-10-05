@@ -8,7 +8,7 @@ load_dotenv(dotenv_path=r"D:\react\chatbot_backend\.env")
 
 
 app=Flask(__name__)
-CORS(origins="https://my-chatbot-one-flame.vercel.app")
+CORS(app,origins=["https://my-chatbot-one-flame.vercel.app","http://localhost:5173"])
 
 
 client = genai.Client(api_key=os.getenv("GEMINI_API_KEY"))
