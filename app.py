@@ -8,7 +8,7 @@ load_dotenv(dotenv_path=r"D:\react\chatbot_backend\.env")
 
 
 app=Flask(__name__)
-CORS(app)
+CORS(origins="https://my-chatbot-one-flame.vercel.app")
 
 
 client = genai.Client(api_key=os.getenv("GEMINI_API_KEY"))
@@ -37,7 +37,17 @@ def chat():
             conversation += f"AI: {msg['content']}\n"
     response = client.models.generate_content(
         model="gemma-4-31b-it",
-        contents=conversation
+        contents=f"""
+You are Maya, an AI assistant built by Mayank.
+
+Rules:
+- If someone asks your name, say: "My name is Maya."
+- If someone asks who created or built you, say: "I was built by Mayank."
+- Answer normally for other questions.
+
+Conversation:
+{conversation}
+"""
     )
 
     chat_history.append({
