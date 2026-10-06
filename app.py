@@ -2,6 +2,7 @@ from flask import Flask, request, jsonify
 from flask_cors import CORS
 from google import genai
 from dotenv import load_dotenv
+from datetime import datetime
 import os
 
 load_dotenv(dotenv_path=r"D:\react\chatbot_backend\.env")
@@ -29,7 +30,8 @@ def chat():
        "content": message
     })
     conversation = ""
-
+    date = datetime.now()
+ 
     for msg in chat_history:
         if msg['role'] == 'user':
             conversation += f"User: {msg['content']}\n"
@@ -47,6 +49,8 @@ Rules:
 
 Conversation:
 {conversation}
+Time:
+{date}
 """
     )
 
